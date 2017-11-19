@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+    magic-backend-service:
+        image: veds/homework-kth-backend:latest
+        ports:
+            - "7331:7331"
+        deploy:
+            replicas: 2
+        networks:
+            - ree
+
+    web-service:
+        image: veds/homework-kth-webservice:latest
+        ports:
+            - "1337:1337"
+        deploy:
+            replicas: 2
+        networks:
+            - ree
+
+    visualizer:
+        image: dockersamples/visualizer:stable
+        ports:
+            - "8080:8080"
+        stop_grace_period: 1m30s
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+
+networks:
+    ree:
