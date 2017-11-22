@@ -1,0 +1,17 @@
+<html>
+    <head></head>
+    <body>
+        <h1>NEWS FLASH</h1>
+        <a href="{% print recent["GUID"] %}"> {% print recent["Title"] %} </a>
+        </br>
+        </hr>
+        </br>
+        <table border="1">
+            {% for article in all_articles %}
+                <tr>
+                    <td><a href="{% print article["GUID"]%}">{% print article["Title"] %}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
